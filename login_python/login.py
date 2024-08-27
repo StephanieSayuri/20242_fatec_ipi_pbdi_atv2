@@ -8,12 +8,12 @@ class Usuario:
 def existe(usuario):
     #Abrir conexão com o PostgreSQL
     with psycopg.connect(host = "localhost",
-                        dbname = "20242_fatec_ipi_pdbi_stephanie",
+                        dbname = "20242_fatec_ipi_pbdi_stephanie",
                         user = "postgres",
                         password = "123456"
     ) as conexao:
     #Por meio da conexão, obter uma abstração do tipo cursor
-      with conexao.cursos() as cursor:
+      with conexao.cursor() as cursor:
         #Por meio do cursor, executar um comando SELECT
         cursor.execute( #in-place
                         'SELECT * FROM tb_usuario WHERE login=%s AND senha=%s', 
@@ -27,3 +27,10 @@ def existe(usuario):
         '''if result != None:
             return True
         return False'''
+
+def main():
+   login = 'admin'
+   senha = 'admin'
+   usuario = Usuario(login, senha)
+   print("Existe" if existe(usuario) else "Não existe")
+main()
